@@ -1,24 +1,26 @@
 class TreeNode:
-	def __init__(self, val):
-		self.val = val
-		self.left, self.right = None, None
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+
 
 class Solution:
-	def hasPathSum(self, root, SUM):
-		self.SUM = SUM
-		self.ans = []
-		self.helper(root, [])
+    def hasPathSum(self, root, SUM):
+        self.SUM = SUM
+        self.ans = []
+        self.helper(root, [])
 
-		return self.ans
+        return self.ans
 
-	def helper(self, root, cur):
-		if root:
-			if not root.left and not root.right:
-				if sum(cur) + root.val == self.SUM:
-					self.ans.append(cur + [root.val])
-			else:
-				self.helper(root.left, cur + [root.val])
-				self.helper(root.right, cur + [root.val])
+    def helper(self, root, cur):
+        if root:
+            if not root.left and not root.right:
+                if sum(cur) + root.val == self.SUM:
+                    self.ans.append(cur + [root.val])
+            else:
+                self.helper(root.left, cur + [root.val])
+                self.helper(root.right, cur + [root.val])
+
 
 root = TreeNode(5)
 root.left = TreeNode(4)

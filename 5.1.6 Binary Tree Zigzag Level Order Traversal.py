@@ -1,25 +1,26 @@
 class TreeNode:
-	def __init__(self, val):
-		self.val = val
-		self.left, self.right = None, None
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+
 
 class Solution:
-	def levelOrderTraversal(self, root):
-		self.res = []
-		self.helper(root, 0)
-		return self.res
+    def levelOrderTraversal(self, root):
+        self.res = []
+        self.helper(root, 0)
+        return self.res
 
-	def helper(self, root, level):
-		if root:
-			if level < len(self.res):
-				if level % 2 == 0:
-					self.res[level].append(root.val)
-				else:
-					self.res[level].insert(0, root.val)
-			else:
-				self.res.append([root.val])
-			self.helper(root.left, level + 1)
-			self.helper(root.right, level + 1)
+    def helper(self, root, level):
+        if root:
+            if level < len(self.res):
+                if level % 2 == 0:
+                    self.res[level].append(root.val)
+                else:
+                    self.res[level].insert(0, root.val)
+            else:
+                self.res.append([root.val])
+            self.helper(root.left, level + 1)
+            self.helper(root.right, level + 1)
 
 
 root = TreeNode(1)

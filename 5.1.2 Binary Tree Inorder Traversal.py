@@ -1,20 +1,22 @@
 class TreeNode:
-	def __init__(self, val):
-		self.val = val
-		self.left, self.right = None, None
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+
 
 class Solution:
-	def inorderTraversal(self, root):
-		self.res = []
-		self.helper(root)
+    def inorderTraversal(self, root):
+        self.res = []
+        self.helper(root)
 
-		return self.res
+        return self.res
 
-	def helper(self, root):
-		if root:
-			self.helper(root.left)
-			self.res.append(root.val)
-			self.helper(root.right)
+    def helper(self, root):
+        if root:
+            self.helper(root.left)
+            self.res.append(root.val)
+            self.helper(root.right)
+
 
 root = TreeNode(1)
 root.left = TreeNode(2)
