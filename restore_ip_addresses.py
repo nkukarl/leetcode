@@ -16,9 +16,8 @@ class Solution:
             A list of IP addresses restored from s
 
         """
-        if re.match(r'\d{4,12}', s) is None:
-            return self.addresses
-        self._restore(s, [])
+        if re.match(r'\d{4,12}', s) is not None:
+            self._restore(s, [])
         return self.addresses
 
     def _restore(self, s, cur):
