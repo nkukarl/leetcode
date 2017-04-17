@@ -8,5 +8,5 @@ class Solution:
             carry = result // 10
             digits[i] = result % 10
             i -= 1
-        if carry:
+        if 1 == carry:
             digits.insert(0, 1)
