@@ -1,11 +1,15 @@
 from unittest import TestCase
 from plus_one import Solution
+import random
 
 
 class TestProblemToSolve(TestCase):
     def test_plus_one(self):
         # Setup
-        digits = [9, 9, 9]
+        number = random.randint(1, 1000)
+
+        digits = list(map(int, str(number)))
+        expected_digits = list(map(int, str(number + 1)))
 
         sol = Solution()
 
@@ -13,4 +17,4 @@ class TestProblemToSolve(TestCase):
         sol.plus_one(digits)
 
         # Verify
-        self.assertEqual(digits, [1, 0, 0, 0])
+        self.assertEqual(digits, expected_digits)
