@@ -1,5 +1,7 @@
 class Solution:
-    def isPalindrome(self, n):
+    def is_palindrome(self, n):
+        if type(n) != int:
+            raise ValueError
         if n < 0:
             return False
         if n == 0:
@@ -13,16 +15,9 @@ class Solution:
         while m >= 10:
             left = m // 10 ** (counter - 1)
             right = m % 10
-            print(left, right)
             if left != right:
                 return False
             m %= 10 ** (counter - 1)
             m //= 10
             counter -= 2
         return True
-
-
-n = 1234321
-
-inst = Solution()
-print(inst.isPalindrome(n))
