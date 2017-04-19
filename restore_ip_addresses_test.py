@@ -1,13 +1,13 @@
 from unittest import TestCase
+
 from restore_ip_addresses import Solution
 
 
 class TestRestoreIPAddresses(TestCase):
     def test_restore_ip_addresses(self):
         # Setup
-        s = '25525511135'
-
         sol = Solution()
+        s = '25525511135'
 
         # Exercise
         ans = sol.restore_ip_addresses(s)

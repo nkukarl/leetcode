@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from two_sum import Solution
 
 
