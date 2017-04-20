@@ -3,7 +3,7 @@ from unittest import TestCase
 from climbing_stairs import Solution
 
 
-class TestProblemToSolve(TestCase):
+class TestClimbingStairs(TestCase):
     def test_climbing_stairs(self):
         # Setup
         sol = Solution()
