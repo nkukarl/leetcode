@@ -1,5 +1,7 @@
 class Solution:
-    def climbStairs(self, n):
+    def climbing_stairs(self, n):
+        if type(n) != int or n <= 0:
+            raise ValueError
         if n <= 2:
             return n
         a, b = 1, 2
@@ -7,7 +9,3 @@ class Solution:
             a, b = b, a + b
             n -= 1
         return b
-
-
-inst = Solution()
-print(inst.climbStairs(5))
