@@ -5,15 +5,16 @@ from unittest import TestCase
 from find_the_difference import Solution
 
 
-class TestProblemToSolve(TestCase):
+class TestFindTheDifference(TestCase):
     def test_find_the_difference(self):
         # Setup
         sol = Solution()
         N = random.randint(5, 20)
         chars = string.ascii_lowercase
-        s = ''.join(random.choice(chars) for _ in range(N))
+        s_raw = [random.choice(chars) for _ in range(N)]
+        s = ''.join(s_raw)
         ex = random.choice(chars)
-        t_raw = list(s) + [ex]
+        t_raw = s_raw + [ex]
         random.shuffle(t_raw)
         t = ''.join(t_raw)
 

@@ -3,7 +3,7 @@ from unittest import TestCase
 from detect_capital import Solution
 
 
-class TestProblemToSolve(TestCase):
+class TestDetectCapital(TestCase):
     def test_detect_capital_use(self):
         # Setup
         sol = Solution()
