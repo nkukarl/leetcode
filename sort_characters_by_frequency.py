@@ -18,4 +18,4 @@ class Solution(object):
         stat = {}
         for c, n in summary.items():
             stat[n] = stat.get(n, []) + [c]
-        return stat, reversed(sorted(list(stat.keys())))
+        return stat, sorted(list(stat.keys()), reverse=True)
