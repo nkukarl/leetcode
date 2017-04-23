@@ -1,7 +1,5 @@
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+from linked_list_utils import ListNode
+
 
 class Solution(object):
     def remove_elements(self, head, val):

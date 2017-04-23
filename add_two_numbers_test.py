@@ -1,10 +1,27 @@
 import random
 from unittest import TestCase
 
-from add_two_numbers import ListNode, Solution
+from add_two_numbers import Solution
+from linked_list_utils import ListNode
 
 
 class TestAddTwoNumbers(TestCase):
+    def test_add_two_numbers(self):
+        # Setup
+        sol = Solution()
+        number1 = random.randint(1, 1000)
+        number2 = random.randint(1, 1000)
+        l1 = self.number_to_list(number1)
+        l2 = self.number_to_list(number2)
+
+        # Exercise
+        ans = sol.add_two_numbers(l1, l2)
+
+        # Verify
+        ans = self.list_to_number(ans)
+        expected_ans = number1 + number2
+        self.assertEqual(ans, expected_ans)
+
     def number_to_list(self, number):
         numbers = list(map(int, str(number)[::-1]))
         head = ListNode(numbers[0])
@@ -21,19 +38,3 @@ class TestAddTwoNumbers(TestCase):
             result.append(node.val)
             node = node.next
         return int(''.join(map(str, result[::-1])))
-
-    def test_add_two_numbers(self):
-        # Setup
-        sol = Solution()
-        number1 = random.randint(1, 1000)
-        number2 = random.randint(1, 1000)
-        l1 = self.number_to_list(number1)
-        l2 = self.number_to_list(number2)
-
-        # Exercise
-        ans = sol.add_two_numbers(l1, l2)
-
-        # Verify
-        ans = self.list_to_number(ans)
-        expected_ans = number1 + number2
-        self.assertEqual(ans, expected_ans)

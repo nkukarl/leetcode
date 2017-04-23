@@ -1,6 +1,7 @@
 from unittest import TestCase
 
-from palindrome_linked_list import ListNode, Solution
+from linked_list_utils import get_head_linked_list
+from palindrome_linked_list import Solution
 
 
 class TestPalindromeLinkedList(TestCase):
@@ -10,7 +11,7 @@ class TestPalindromeLinkedList(TestCase):
         # linked_list_raw = [1, 2, 3, 4, 3, 2, 1]
         # linked_list_raw = [1, 2, 3, 4, 4, 3, 2, 1]
         linked_list_raw = [1, 2, 3, 4, 4, 2, 1]
-        head = self.get_head(linked_list_raw)
+        head = get_head_linked_list(linked_list_raw)
 
         # Exercise
         ans = sol.is_palindrome(head)
@@ -18,16 +19,6 @@ class TestPalindromeLinkedList(TestCase):
 
         # Verify
         self.assertEqual(ans, expected_ans)
-
-    def get_head(self, linked_list_raw):
-        if 0 == len(linked_list_raw):
-            return None
-        head = ListNode(linked_list_raw[0])
-        node = head
-        for val in linked_list_raw[1:]:
-            node.next = ListNode(val)
-            node = node.next
-        return head
 
     def is_palindrome(self, linked_list_raw):
         left, right = 0, len(linked_list_raw) - 1

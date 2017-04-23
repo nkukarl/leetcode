@@ -1,8 +1,3 @@
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
 class Solution(object):
     def odd_even_list(self, head):
         # Handle simple scenarios: list length is 0, 1 or 2

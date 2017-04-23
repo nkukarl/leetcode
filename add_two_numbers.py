@@ -1,7 +1,4 @@
-class ListNode:
-    def __init__(self, val, next=None):
-        self.val = val
-        self.next = next
+from linked_list_utils import ListNode
 
 
 class Solution:
