@@ -5,7 +5,6 @@ from student_attendance_record_ii import Solution
 
 
 class TestCheckRecord(TestCase):
-
     def check_record(self, n):
         seq = [1, 3, 8, 19]
         if n <= 3:

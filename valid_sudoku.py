@@ -58,7 +58,7 @@ class Solution:
 
         try:
             collection = list(map(int, raw_collection.replace('.', '')))
-        except ValueError: # Might contain invalid literal for int()
+        except ValueError:  # Might contain invalid literal for int()
             return False
         else:
             return len(set(collection)) == len(collection)

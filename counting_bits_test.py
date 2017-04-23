@@ -26,4 +26,3 @@ class TestCountingBits(TestCase):
                 n >>= 1
             bits.append(bit)
         return bits
-

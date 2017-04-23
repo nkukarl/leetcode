@@ -2,7 +2,7 @@ import random
 from unittest import TestCase
 
 from add_two_numbers import Solution
-from linked_list_utils import ListNode
+from utils_linked_list import ListNode
 
 
 class TestAddTwoNumbers(TestCase):

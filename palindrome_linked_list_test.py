@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from linked_list_utils import get_head_linked_list
+from utils_linked_list import get_head_linked_list
 from palindrome_linked_list import Solution
 
 

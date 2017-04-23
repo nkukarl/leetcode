@@ -1,4 +1,5 @@
-from linked_list_utils import ListNode
+from utils_linked_list import ListNode
+
 
 class Solution(object):
     def is_palindrome(self, head):

@@ -1,7 +1,7 @@
 import random
 from unittest import TestCase
 
-from linked_list_utils import compare_linked_lists, get_head_linked_list
+from utils_linked_list import compare_linked_lists, get_head_linked_list
 from remove_linked_list_elements import Solution
 
 
