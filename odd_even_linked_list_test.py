@@ -1,8 +1,8 @@
 import random
 from unittest import TestCase
 
-from utils_linked_list import compare_linked_lists, get_head_linked_list
 from odd_even_linked_list import Solution
+from utils_linked_list import compare_linked_lists, get_head_linked_list
 
 
 class TestOddEvenList(TestCase):

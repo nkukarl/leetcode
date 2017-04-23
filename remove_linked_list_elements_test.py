@@ -1,8 +1,8 @@
 import random
 from unittest import TestCase
 
-from utils_linked_list import compare_linked_lists, get_head_linked_list
 from remove_linked_list_elements import Solution
+from utils_linked_list import compare_linked_lists, get_head_linked_list
 
 
 class TestRemoveLinkedListElements(TestCase):

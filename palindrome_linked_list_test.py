@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from utils_linked_list import get_head_linked_list
 from palindrome_linked_list import Solution
+from utils_linked_list import get_head_linked_list
 
 
 class TestPalindromeLinkedList(TestCase):
