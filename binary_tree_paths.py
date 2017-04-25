@@ -7,7 +7,8 @@ class Solution(object):
     def traverse(self, root, cur):
         if root is None:
             return
+        next_ = cur + [str(root.val)]
         if root.left is None and root.right is None:
-            self.paths.append('->'.join(cur + [str(root.val)]))
-        self.traverse(root.left, cur + [str(root.val)])
-        self.traverse(root.right, cur + [str(root.val)])
+            self.paths.append('->'.join(next_))
+        self.traverse(root.left, next_)
+        self.traverse(root.right, next_)
