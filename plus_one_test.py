@@ -4,7 +4,7 @@ from unittest import TestCase
 from plus_one import Solution
 
 
-class TestProblemToSolve(TestCase):
+class TestPlusOne(TestCase):
     def test_plus_one(self):
         # Setup
         sol = Solution()
