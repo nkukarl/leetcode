@@ -3,6 +3,7 @@ from unittest import TestCase
 from flatten_nested_list_iterator import NestedIteratorSelf
 
 
+# TODO: Add test case for NestedIterator
 class TestNestedIteratorSelf(TestCase):
     def test_nested_iterator_self(self):
         # Setup
