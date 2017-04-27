@@ -37,3 +37,7 @@ class TestValidAnagram(TestCase):
 
         # Verify
         self.assertFalse(ans)
+
+    def is_anagram(self, s, t):
+        # TODO: Anything more efficient?
+        pass
