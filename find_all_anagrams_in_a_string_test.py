@@ -1,0 +1,34 @@
+from unittest import TestCase
+
+from nose_parameterized import parameterized
+
+from find_all_anagrams_in_a_string import Solution
+
+
+class TestFindAllAnagramsInAString(TestCase):
+    @parameterized.expand([
+        [
+            'cbaebabacd',
+            'abc',
+            [0, 6],
+        ],
+        [
+            'abab',
+            'ab',
+            [0, 1, 2],
+        ],
+        [
+            'a' * 100000,
+            'a' * 99999,
+            [0, 1],
+        ]
+    ])
+    def test_find_anagrams(self, s, p, expected_ans):
+        # Setup
+        sol = Solution()
+
+        # Exercise
+        ans = sol.find_anagrams(s, p)
+
+        # Verify
+        self.assertEqual(ans, expected_ans)
