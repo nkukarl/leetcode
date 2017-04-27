@@ -2,31 +2,24 @@ class Solution(object):
     def find_anagrams(self, s, word):
         if len(s) < len(word):
             return []
-        self.summary_word = self.summarise(word)
-        indices = []
-        valid_anagrams = {word}
-        invalid_anagrams = set()
-        for i in range(len(s) - len(word) + 1):
-            ss = s[i: i + len(word)]
-            if ss in invalid_anagrams:
-                continue
-            if ss in valid_anagrams:
-                indices.append(i)
-                continue
-            if self.is_anagram(ss):
-                valid_anagrams.add(ss)
-                indices.append(i)
-            else:
-                invalid_anagrams.add(ss)
+        summary_w = self.summarise(word)
+        summary_s = self.summarise(s[:len(word)])
+        diff = [sw - ss for sw, ss in zip(summary_w, summary_s)]
+        if not any(diff):
+            indices = [0]
+        else:
+            indices = []
+        for i in range(len(s) - len(word)):
+            old = s[i]
+            new = s[i + len(word)]
+            diff[ord(old) - ord('a')] += 1
+            diff[ord(new) - ord('a')] -= 1
+            if not any(diff):
+                indices.append(i + 1)
         return indices
 
     def summarise(self, s):
         summary = [0] * 26
         for ss in s:
-            summary[ord(ss) - 97] += 1
+            summary[ord(ss) - ord('a')] += 1
         return summary
-
-    def is_anagram(self, t):
-        summary_t = self.summarise(t)
-        diff = [w - t for w, t in zip(self.summary_word, summary_t)]
-        return not any(diff)

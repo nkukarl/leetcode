@@ -18,8 +18,8 @@ class TestFindAllAnagramsInAString(TestCase):
             [0, 1, 2],
         ],
         [
-            'a' * 100000,
-            'a' * 99999,
+            'a' * 1000000,
+            'a' * 999999,
             [0, 1],
         ]
     ])
