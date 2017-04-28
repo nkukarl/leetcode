@@ -1,9 +1,6 @@
 class Solution(object):
     def find_mode(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
+        # TODO: Anything more efficient?
         self.summary = {}
         self.max_count = 0
         ans = []
