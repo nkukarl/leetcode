@@ -14,14 +14,12 @@ def get_head_linked_list(linked_list_raw):
         ListNode
 
     """
-    if 0 == len(linked_list_raw):
-        return None
-    head = ListNode(linked_list_raw[0])
-    node = head
-    for val in linked_list_raw[1:]:
+    dummy = ListNode(0)
+    node = dummy
+    for val in linked_list_raw:
         node.next = ListNode(val)
         node = node.next
-    return head
+    return dummy.next
 
 
 def compare_linked_lists(head1, head2):
