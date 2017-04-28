@@ -1,10 +1,11 @@
 class Solution(object):
     def next_permutation(self, nums):
-        index = len(nums) - 2
+        index = len(nums) - 1
         pivot = None
-        while index > -1:
-            if nums[index] < nums[index + 1]:
-                pivot = index
+        while index > 0:
+            # To get previous permutation, change '<' to '>'
+            if nums[index - 1] < nums[index]:
+                pivot = index - 1
                 break
             index -= 1
         if pivot is None:
@@ -12,7 +13,8 @@ class Solution(object):
             return
         index = len(nums) - 1
         while True:
-            if nums[index] > nums[pivot]:
+            # To get previous permutation, change '<' to '>'
+            if nums[pivot] < nums[index]:
                 break
             index -= 1
         nums[pivot], nums[index] = nums[index], nums[pivot]
