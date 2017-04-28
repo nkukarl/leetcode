@@ -23,12 +23,12 @@ class TestFindAllAnagramsInAString(TestCase):
             [0, 1],
         ]
     ])
-    def test_find_anagrams(self, s, p, expected_ans):
+    def test_find_anagrams(self, s, word, expected_ans):
         # Setup
         sol = Solution()
 
         # Exercise
-        ans = sol.find_anagrams(s, p)
+        ans = sol.find_anagrams(s, word)
 
         # Verify
         self.assertEqual(ans, expected_ans)
