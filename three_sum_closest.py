@@ -5,7 +5,7 @@ class Solution(object):
         nums.sort()
         closest = sum(nums[:3])
         diff_min = abs(closest - target)
-        for i, num_i in enumerate(nums):
+        for i in range(len(nums)):
             j = i + 1
             k = len(nums) - 1
             while j < k:
