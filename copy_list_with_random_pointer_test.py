@@ -38,7 +38,25 @@ class TestCopyListWithRandomPointer(TestCase):
     def test_copy_random_list_dynamically_generated(self):
         # Setup
         sol = Solution()
-        random_linked_list_raw = random.sample(list(range(9)), 5)
+        random_linked_list_raw = random.sample(list(range(9)), 9)
+        head = self.get_head_random_linked_list(random_linked_list_raw)
+        nodes = []
+        node = head
+        while node is not None:
+            nodes.append(node)
+            node = node.next
+        for node in nodes:
+            node.random = random.choice(nodes)
+        # Exercise
+        head_copied = sol.copy_random_list(head)
+
+        # Verify
+        self.assertTrue(self.compare_random_linked_lists(head, head_copied))
+
+    def test_copy_random_list_duplicated_labels(self):
+        # Setup
+        sol = Solution()
+        random_linked_list_raw = [random.randint(1, 3) for _ in range(9)]
         head = self.get_head_random_linked_list(random_linked_list_raw)
         nodes = []
         node = head
@@ -62,21 +80,25 @@ class TestCopyListWithRandomPointer(TestCase):
         return dummy.next
 
     def compare_random_linked_lists(self, head1, head2):
-        if head1 is None and head2 is None:
-            return True
-        node1, node2 = head1, head2
-        while node1 is not None and node2 is not None:
-            if node1 == node2:  # Must be a copy
-                return False
-            if node1.label != node2.label:
-                return False
-            # Actually this comparison is not sufficient,
-            # but the test cases would avoid using lists
-            # of nodes with the same label.
-            if node1.random.label != node2.random.label:
-                return False
-            node1 = node1.next
-            node2 = node2.next
-        if node1 is not None or node2 is not None:
-            return False
-        return True
+        labels1, randoms1 = self.summarise_random_linked_list(head1)
+        labels2, randoms2 = self.summarise_random_linked_list(head2)
+        return labels1 == labels2 and randoms1 == randoms2
+
+    def summarise_random_linked_list(self, head):
+        nodes = []
+        labels = []
+        randoms = []
+        node = head
+        while node is not None:
+            labels.append(node.label)
+            nodes.append(node)
+            node = node.next
+        for node in nodes:
+            randoms.append(self.get_index(node.random, nodes))
+        return labels, randoms
+
+    def get_index(self, node_, nodes):
+        for i, node in enumerate(nodes):
+            if node_ == node:
+                return i
+        return None
