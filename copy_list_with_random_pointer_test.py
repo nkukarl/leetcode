@@ -1,6 +1,8 @@
 import random
 from unittest import TestCase
 
+from nose_parameterized import parameterized
+
 from copy_list_with_random_pointer import RandomListNode, Solution
 
 
@@ -35,28 +37,18 @@ class TestCopyListWithRandomPointer(TestCase):
         # Verify
         self.assertTrue(self.compare_random_linked_lists(head, head_copied))
 
-    def test_copy_random_list_dynamically_generated(self):
+    @parameterized.expand([
+        [
+            random.sample(list(range(9)), 9),
+        ],
+        [
+            # Duplicated labels
+            [random.randint(1, 3) for _ in range(9)],
+        ]
+    ])
+    def test_copy_random_list_dynamically_generated(self, random_linked_list_raw):
         # Setup
         sol = Solution()
-        random_linked_list_raw = random.sample(list(range(9)), 9)
-        head = self.get_head_random_linked_list(random_linked_list_raw)
-        nodes = []
-        node = head
-        while node is not None:
-            nodes.append(node)
-            node = node.next
-        for node in nodes:
-            node.random = random.choice(nodes)
-        # Exercise
-        head_copied = sol.copy_random_list(head)
-
-        # Verify
-        self.assertTrue(self.compare_random_linked_lists(head, head_copied))
-
-    def test_copy_random_list_duplicated_labels(self):
-        # Setup
-        sol = Solution()
-        random_linked_list_raw = [random.randint(1, 3) for _ in range(9)]
         head = self.get_head_random_linked_list(random_linked_list_raw)
         nodes = []
         node = head
