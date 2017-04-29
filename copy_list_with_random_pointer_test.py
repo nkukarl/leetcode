@@ -1,3 +1,4 @@
+import random
 from unittest import TestCase
 
 from copy_list_with_random_pointer import RandomListNode, Solution
@@ -28,6 +29,24 @@ class TestCopyListWithRandomPointer(TestCase):
         first.random = third
         second.random = first
         third.random = second
+        # Exercise
+        head_copied = sol.copy_random_list(head)
+
+        # Verify
+        self.assertTrue(self.compare_random_linked_lists(head, head_copied))
+
+    def test_copy_random_list_dynamically_generated(self):
+        # Setup
+        sol = Solution()
+        random_linked_list_raw = random.sample(list(range(9)), 5)
+        head = self.get_head_random_linked_list(random_linked_list_raw)
+        nodes = []
+        node = head
+        while node is not None:
+            nodes.append(node)
+            node = node.next
+        for node in nodes:
+            node.random = random.choice(nodes)
         # Exercise
         head_copied = sol.copy_random_list(head)
 
