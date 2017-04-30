@@ -3,6 +3,7 @@ class Solution(object):
         if 1 == a:
             return 1
         n = int(''.join(map(str, b)))
+        a %= 1337
         return self.get_power(a, n)
 
     def get_power(self, a, n):
