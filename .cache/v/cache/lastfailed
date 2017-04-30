@@ -1,1 +1,3 @@
-{}
+{
+  "mini_parser_test.py::TestMiniParser::test_deserialize_list": true
+}
