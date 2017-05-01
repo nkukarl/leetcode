@@ -29,7 +29,7 @@ class TestMiniParser(TestCase):
         self.assertFalse(nested_integer.is_integer())
         lst = nested_integer.get_list()
         self.assertEqual(lst[:2], [123, -123])
-        lst_ = lst[-1]
+        lst_ = lst[-1].get_list()
         self.assertEqual(lst_[:2], [456, -456])
-        lst__ = lst_[-1]
-        self.assertEqual(lst__[:2], [789, -789])
+        lst__ = lst_[-1].get_list()
+        self.assertEqual(lst__, [789, -789])
