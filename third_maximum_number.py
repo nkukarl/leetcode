@@ -1,15 +1,20 @@
 class Solution(object):
-    def find_kth_largest(self, nums, k):
-        if k > len(nums):
+    def third_max(self, nums):
+        if 0 == len(nums):
             raise ValueError
-        # Let MIN be min(nums) - 1 for use in sift_down method
+        if len(nums) < 3:
+            return max(nums)
         self.MIN = min(nums) - 1
         self.nums = nums
         self.heapify()
-        while k > 1:
-            self.pop_current_max()
-            k -= 1
-        return self.pop_current_max()
+        top_3 = [self.pop_current_max()]
+        while self.nums and len(top_3) < 3:
+            max_ = self.pop_current_max()
+            if top_3[-1] != max_:
+                top_3.append(max_)
+        if len(top_3) < 3:
+            return top_3[0]
+        return top_3[-1]
 
     def heapify(self):
         k = len(self.nums) // 2 - 1
@@ -28,15 +33,10 @@ class Solution(object):
         while True:
             n = self.nums[k]
             left, right = k * 2 + 1, k * 2 + 2
-            # If left or right child does not exist, assume their values
-            # are smaller than that of parent by letting the values be MIN.
             n_left = self.nums[left] if left < len(self.nums) else self.MIN
             n_right = self.nums[right] if right < len(self.nums) else self.MIN
-            # If the value of parent is greater than both children,
-            # stop sifting down.
             if n_left < n > n_right:
                 break
-            # Swap the value of parent with the child with larger value
             if n_left < n_right:
                 self.nums[k], self.nums[right] = self.nums[right], self.nums[k]
                 k = right
