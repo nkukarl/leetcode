@@ -1,14 +1,13 @@
 class Solution(object):
     def is_valid(self, s):
         stack = []
-        left = {0: '(', 1: '[', 2: '{'}
-        right = {')': 0, ']': 1, '}': 2}
+        parentheses = {')': '(', ']': '[', '}': '{'}
         for char in s:
-            if char in right:
-                if len(stack) > 0 and stack[-1] == left[right[char]]:
+            if char in parentheses.values():
+                stack.append(char)
+            else:
+                if len(stack) > 0 and stack[-1] == parentheses[char]:
                     stack.pop()
                 else:
                     return False
-            else:
-                stack.append(char)
         return [] == stack
