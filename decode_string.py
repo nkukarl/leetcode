@@ -1,27 +1,28 @@
-import string
+import re
+from string import ascii_lowercase as LETTERS
 
 
 class Solution(object):
     def decode_string(self, s):
-        stack = []
-        for char in s:
-            if [] == stack:
-                stack.append(char)
-                continue
+        if '' == s:
+            return ''
+        stack = [s[0]]
+        for char in s[1:]:
             if char != ']':
-                if (char in string.digits and stack[-1][0] in string.digits) \
-                        or (char in string.ascii_lowercase and
-                                    stack[-1][0] in string.ascii_lowercase):
+                # char and the last element of stack are both
+                # <1> lowercase letters or
+                # <2> digits
+                if re.match(r'^([a-z]{2,}|\d{2,})$', stack[-1] + char):
                     stack[-1] += char
                 else:
                     stack.append(char)
             else:
-                s = stack.pop()
+                ss = stack.pop()
                 stack.pop()
                 count = int(stack.pop())
-                s = s * count
-                if [] == stack or stack[-1][0] not in string.ascii_lowercase:
-                    stack.append(s)
+                ss = ss * count
+                if [] == stack or stack[-1][0] not in LETTERS:
+                    stack.append(ss)
                 else:
-                    stack[-1] += s
-        return ''.join(stack)
+                    stack[-1] += ss
+        return stack[0]

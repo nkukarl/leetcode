@@ -31,7 +31,12 @@ class TestDecodeString(TestCase):
             },
             'abcabccdcdcdcdcdcdcdcdcdcdef',
         ],
-
+        [
+            {
+                's': '2[2[b]]',
+            },
+            'bbbb',
+        ]
     ])
     def test_decode_string(self, kwargs, expected_ans):
         # Setup
