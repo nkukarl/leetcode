@@ -18,4 +18,16 @@ class Solution(object):
         return 0 == z % gcd
 
     def get_gcd(self, x, y):
+        """
+
+        Get greatest common divisor of x and y
+
+        Args:
+            x (int):
+            y (int):
+
+        Returns:
+            int
+
+        """
         return x if 0 == y else self.get_gcd(y, x % y)
