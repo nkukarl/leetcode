@@ -7,6 +7,9 @@ class Solution(object):
             y (int): Size of jug 2
             z (int): Desired water size
 
+        Returns:
+            bool
+
         """
         if x < y:
             x, y = y, x
@@ -20,7 +23,7 @@ class Solution(object):
     def get_gcd(self, x, y):
         """
 
-        Get greatest common divisor of x and y
+        Get greatest common divisor of x and y.
 
         Args:
             x (int):
