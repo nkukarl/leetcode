@@ -24,6 +24,8 @@ class Solution(object):
             divisor >>= 1
         if -1 == sign:
             ans = -ans
-        if ans > MAX_INT or ans < MIN_INT:
-            return OVERFLOW
+        if ans > MAX_INT:
+            return MAX_INT
+        if ans < MIN_INT:
+            return MIN_INT
         return ans
