@@ -12,7 +12,7 @@ class Solution:
             counter += 1
             m //= 10
         m = n
-        while m >= 10:
+        while counter > 1:
             left = m // 10 ** (counter - 1)
             right = m % 10
             if left != right:

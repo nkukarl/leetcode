@@ -1,16 +1,31 @@
 from unittest import TestCase
 
+from nose_parameterized import parameterized
+
 from palindrome_number import Solution
 
 
 class TestPalindromeNumber(TestCase):
-    def test_palindrome_number(self):
+    @parameterized.expand([
+        [
+            {
+                'n': 1010110101,
+            },
+            True,
+        ],
+        [
+            {
+                'n': 1000021,
+            },
+            False,
+        ],
+    ])
+    def test_palindrome_number(self, kwargs, expected_ans):
         # Setup
         sol = Solution()
-        n = 1010110101
 
         # Exercise
-        ans = sol.is_palindrome(n)
+        ans = sol.is_palindrome(**kwargs)
 
         # Verify
-        self.assertTrue(ans)
+        self.assertEqual(ans, expected_ans)
