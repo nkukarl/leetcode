@@ -22,6 +22,22 @@ def get_head_linked_list(linked_list_raw):
     return dummy.next
 
 
+def retrieve_tail_linked_list(head):
+    """
+
+    Args:
+        head (ListNode):
+
+    Returns:
+        ListNode
+
+    """
+    node = head
+    while node.next is not None:
+        node = node.next
+    return node
+
+
 def compare_linked_lists(head1, head2):
     """
 
