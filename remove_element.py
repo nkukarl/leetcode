@@ -1,14 +1,10 @@
 class Solution:
-    def remove_element(self, numbers, target):
-        left, right = 0, len(numbers) - 1
-        while left < right:
-            while left < right and numbers[left] != target:
-                left += 1
-            while left < right and numbers[right] == target:
+    def remove_element(self, nums, val):
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            if nums[left] == val:
+                nums[left], nums[right] = nums[right], nums[left]
                 right -= 1
-            if left < right:
-                numbers[left], numbers[right] = \
-                    numbers[right], numbers[left]
+            else:
                 left += 1
-                right -= 1
-        return left + 1
+        return left
