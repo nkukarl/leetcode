@@ -1,61 +1,51 @@
 class Solution(object):
     def original_digits(self, s):
-        summary = self.summarise_string(s)
-        counts = [0] * 10
+        self.D = {
+            0: 'zero',
+            1: 'one',
+            2: 'two',
+            3: 'three',
+            4: 'four',
+            5: 'five',
+            6: 'six',
+            7: 'seven',
+            8: 'eight',
+            9: 'nine',
+        }
+        self.summarise_string(s)
+        self.counts = [0] * 10
 
-        # Unique char in word
-        if summary.get('z', 0) > 0:
-            counts[0] = count = summary['z']
-            for char in 'zero':
-                summary[char] -= count
-        if summary.get('w', 0) > 0:
-            counts[2] = count = summary['w']
-            for char in 'two':
-                summary[char] -= count
-        if summary.get('u', 0) > 0:
-            counts[4] = count = summary['u']
-            for char in 'four':
-                summary[char] -= count
-        if summary.get('x', 0) > 0:
-            counts[6] = count = summary['x']
-            for char in 'six':
-                summary[char] -= count
-        if summary.get('g', 0) > 0:
-            counts[8] = count = summary['g']
-            for char in 'eight':
-                summary[char] -= count
+        # Process words with unique identifier
+        self.identify('z', 0)
+        self.identify('w', 2)
+        self.identify('u', 4)
+        self.identify('x', 6)
+        self.identify('g', 8)
 
         # Non-unique
-        if summary.get('o', 0) > 0:
-            counts[1] = count = summary['o']
-            for char in 'one':
-                summary[char] -= count
-        if summary.get('h', 0) > 0:
-            counts[3] = count = summary['h']
-            for char in 'three':
-                summary[char] -= count
-        if summary.get('f', 0) > 0:
-            counts[5] = count = summary['f']
-            for char in 'five':
-                summary[char] -= count
-        if summary.get('v', 0) > 0:
-            counts[7] = count = summary['v']
-            for char in 'seven':
-                summary[char] -= count
-        if summary.get('i', 0) > 0:
-            counts[9] = count = summary['i']
-            for char in 'nine':
-                summary[char] -= count
+        self.identify('o', 1)
+        self.identify('h', 3)
+        self.identify('f', 5)
+        self.identify('v', 7)
+        self.identify('i', 9)
+
+        # Prepare answer
         ans = ''
-        for i, count in enumerate(counts):
+        for i, count in enumerate(self.counts):
             ans += str(i) * count
         return ans
 
+    def identify(self, unique_identifier, i):
+        word = self.D[i]
+        if self.summary.get(unique_identifier, 0) > 0:
+            self.counts[i] = self.summary[unique_identifier]
+            for char in word:
+                self.summary[char] -= self.counts[i]
+
     def summarise_string(self, s):
-        summary = {}
+        self.summary = {}
         for char in s:
-            summary[char] = summary.get(char, 0) + 1
-        return summary
+            self.summary[char] = self.summary.get(char, 0) + 1
 
     def summarise_numbers(self):
         """
