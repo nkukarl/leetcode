@@ -1,4 +1,4 @@
-class Trie(object):
+class TrieNode(object):
     def __init__(self):
         self.children = {}
         self.is_word = False
@@ -6,13 +6,13 @@ class Trie(object):
 
 class WordDictionary(object):
     def __init__(self):
-        self.root = Trie()
+        self.root = TrieNode()
 
     def add_word(self, word):
         node = self.root
         for w in word:
             if w not in node.children:
-                node.children[w] = Trie()
+                node.children[w] = TrieNode()
             node = node.children[w]
         node.is_word = True
 
