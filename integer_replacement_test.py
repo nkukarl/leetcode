@@ -19,6 +19,12 @@ class TestIntegerReplacement(TestCase):
             },
             3,
         ],
+        [
+            {
+                'n': 4998695,
+            },
+            30,
+        ]
     ])
     def test_integer_replacement(self, kwargs, expected_ans):
         # Setup
