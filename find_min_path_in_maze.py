@@ -1,30 +1,32 @@
-# TODO: Fix this!
 class Solution(object):
-    def find_min_path(self, maze, xa, ya, xb, yb):
-        self.maze, self.m, self.n = maze, len(maze), len(maze[0])
-        self.xb, self.yb = xb, yb
-        self.visited = [[0] * self.n for _ in range(self.m)]
-        self.min_steps = self.m * self.n
-        self.path = None
-        self.search(xa, ya, 0, [])
-        print(self.path)
-        return self.min_steps
+    def find_min_path(self, maze, origin, dest):
+        self.m, self.n = len(maze), len(maze[0])
+        self.MAX_DIST = self.m * self.n + 1
+        visited = [[0] * self.n for _ in range(self.m)]
 
-    def search(self, x, y, steps, path):
-        if x == self.xb and y == self.yb:
-            if steps < self.min_steps:
-                self.path = path
-                self.min_steps = steps
-            return
-        if self.maze[x][y] == '0' or self.visited[x][y] == 1:
-            return
-        self.visited[x][y] = 1
+        self.dest = dest
+        origin_i, origin_j = origin
 
-        if x < self.m - 1:
-            self.search(x + 1, y, steps + 1, path + [(x + 1, y)])
-        if x > 0:
-            self.search(x - 1, y, steps + 1, path + [(x - 1, y)])
-        if y > 0:
-            self.search(x, y - 1, steps + 1, path + [(x, y - 1)])
-        if y < self.n - 1:
-            self.search(x, y + 1, steps + 1, path + [(x, y + 1)])
+        path = self.explore(maze, origin_i, origin_j, 0, visited)
+        return path if path < self.MAX_DIST else -1
+
+    def explore(self, maze, i, j, current_dist, visited):
+        if i < 0 or j < 0 or i >= self.m or j >= self.n or \
+                visited[i][j] or '0' == maze[i][j]:
+            return self.MAX_DIST
+
+        if [i, j] == self.dest:
+            return current_dist
+
+        visited[i][j] = 1
+
+        dist_min = min([
+            self.explore(maze, i - 1, j, current_dist + 1, visited),
+            self.explore(maze, i + 1, j, current_dist + 1, visited),
+            self.explore(maze, i, j - 1, current_dist + 1, visited),
+            self.explore(maze, i, j + 1, current_dist + 1, visited),
+        ])
+
+        visited[i][j] = 0
+
+        return dist_min
