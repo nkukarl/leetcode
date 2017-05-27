@@ -35,3 +35,33 @@ class TestMinimumMovesToEqualArrayElements(TestCase):
 
         # Verify
         self.assertEqual(ans, expected_ans)
+
+    @parameterized.expand([
+        [
+            {
+                'nums': [],
+            },
+            0
+        ],
+        [
+            {
+                'nums': [1, 1, 5],
+            },
+            4,
+        ],
+        [
+            {
+                'nums': [1, 0, 0, 8, 6],
+            },
+            14,
+        ],
+    ])
+    def test_min_moves2(self, kwargs, expected_ans):
+        # Setup
+        sol = Solution()
+
+        # Exercise
+        ans = sol.min_moves2(**kwargs)
+
+        # Verify
+        self.assertEqual(ans, expected_ans)
