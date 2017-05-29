@@ -11,10 +11,9 @@ class TestLongestPalindrome(TestCase):
             {
                 's': 'abccccdd',
             },
-            7,
         ],
     ])
-    def test_longest_palindrome(self, kwargs, expected_ans):
+    def test_longest_palindrome(self, kwargs):
         # Setup
         sol = Solution()
 
@@ -22,4 +21,23 @@ class TestLongestPalindrome(TestCase):
         ans = sol.longest_palindrome(**kwargs)
 
         # Verify
+        expected_ans = self.longest_palindrome(**kwargs)
         self.assertEqual(ans, expected_ans)
+
+    def longest_palindrome(self, s):
+        summary = {}
+        for char in s:
+            summary[char] = summary.get(char, 0) + 1
+
+        flag = False
+        ans = 0
+        for char in summary:
+            if summary[char] % 2 != 0:
+                if not flag:
+                    ans += summary[char]
+                    flag = True
+                else:
+                    ans += summary[char] - 1
+            else:
+                ans += summary[char]
+        return ans
