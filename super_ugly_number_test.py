@@ -21,6 +21,13 @@ class TestSuperUglyNumber(TestCase):
             },
             207575,
         ],
+        [
+            {
+                'n': 100,
+                'primes': [2, 3, 5],
+            },
+            1536,
+        ]
     ])
     def test_nth_super_ugly_number(self, kwargs, expected_ans):
         # Setup
