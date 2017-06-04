@@ -63,3 +63,41 @@ def compare_trees(root1, root2):
         return False
     return compare_trees(root1.left, root2.left) and \
            compare_trees(root1.right, root2.right)
+
+
+def construct_tree(serialized_data):
+    """
+    E.g., Tree
+                    5
+                   / \
+                  4   7
+                 /   /
+                3   2
+               /   /
+              -1  9
+    can be specified as 
+    serialized_data = [[5], [4, 7], [3, None, 2, None], [-1, None, 9]]
+    """
+
+    if 0 == len(serialized_data):
+        return None
+    root = TreeNode(serialized_data[0][0])
+    prev = [root]
+    for row in serialized_data[1:]:
+        nodes, cur = [], []
+        for el in row:
+            if el is not None:
+                node = TreeNode(el)
+                cur.append(node)
+            else:
+                node = None
+            nodes.append(node)
+        prev = prev[::-1]
+        nodes = nodes[::-1]
+        while prev:
+            parent = prev.pop()
+            parent.left = nodes.pop()
+            if nodes:
+                parent.right = nodes.pop()
+        prev = cur
+    return root
