@@ -94,7 +94,7 @@ def construct_tree(serialized_data):
             nodes.append(node)
         prev = prev[::-1]
         nodes = nodes[::-1]
-        while prev:
+        while prev and nodes:
             parent = prev.pop()
             parent.left = nodes.pop()
             if nodes:
