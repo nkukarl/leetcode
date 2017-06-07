@@ -3,18 +3,15 @@ class Solution(object):
         if len(s) != len(t):
             return False
 
-        summary_s, summary_t = {}, {}
-        for ss, tt in zip(s, t):
-            if ss in summary_s:
-                if tt != summary_s[ss]:
-                    return False
-            else:
-                summary_s[ss] = tt
+        return self.check_surjective(s, t) and self.check_surjective(t, s)
 
-            if tt in summary_t:
-                if ss != summary_t[tt]:
+    def check_surjective(self, s, t):
+        summary = {}
+        for ss, tt in zip(s, t):
+            if ss in summary:
+                if tt != summary[ss]:
                     return False
             else:
-                summary_t[tt] = ss
+                summary[ss] = tt
 
         return True
