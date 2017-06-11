@@ -8,6 +8,9 @@ class Solution(object):
                     counts[i][0] += 1
                 else:
                     counts[i][1] += 1
+                # Actually the above if-else can be simplified as:
+                # counts[i][n & 1] += 1
+                # But makes it harder to understand.
                 n >>= 1
         total_dist = 0
         for count in counts:
