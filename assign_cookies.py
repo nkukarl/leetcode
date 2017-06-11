@@ -1,11 +1,12 @@
 class Solution(object):
-    def find_content_children(self, greed_levels, cookie_sizes):
-        i = j = 0
+    def find_content_children(self, greed_levels, sizes):
         greed_levels.sort()
-        cookie_sizes.sort()
-        m, n = len(greed_levels), len(cookie_sizes)
-        while i < m and j < n:
-            if greed_levels[i] <= cookie_sizes[j]:
-                i += 1
-            j += 1
-        return i
+        sizes.sort()
+        m = len(greed_levels)
+        count = 0
+        for size in sizes:
+            if count == m:
+                return count
+            if size >= greed_levels[count]:
+                count += 1
+        return count

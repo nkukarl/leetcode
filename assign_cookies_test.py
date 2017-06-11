@@ -10,21 +10,21 @@ class TestAssignCookies(TestCase):
         [
             {
                 'greed_levels': [1, 2, 3],
-                'cookie_sizes': [2, 3, 4],
+                'sizes': [2, 3, 4],
             },
             3,
         ],
         [
             {
                 'greed_levels': [1, 2, 3],
-                'cookie_sizes': [1, 1, 3],
+                'sizes': [1, 1, 3],
             },
             2,
         ],
         [
             {
                 'greed_levels': [1, 2, 3],
-                'cookie_sizes': [1, 1, 1],
+                'sizes': [1, 1, 1],
             },
             1,
         ],
