@@ -14,22 +14,17 @@ class Solution(object):
         10: 8877691,
     }
     """
-    def count_numbers_with_unique_digits(self, n):
-        n = n if n <= 10 else 10
-        self.factorials = self.get_factorials()
-        return self.count_numbers(n)
 
-    def count_numbers(self, n):
+    def count_numbers_with_unique_digits(self, n):
+        n = min(n, 10)
+        return sum([self.count_n_digits(i) for i in range(n + 1)])
+
+    def count_n_digits(self, n):
         if n == 0:
             return 1
-        count_ = self.count_numbers(n - 1)
-        return self.count_permutation(9, n - 1) * 9 + count_
-
-    def count_permutation(self, n, k):
-        return self.factorials[n] // self.factorials[n - k]
-
-    def get_factorials(self):
-        factorials = [1]
-        for n in range(1, 10):
-            factorials.append(factorials[-1] * n)
-        return factorials
+        count = 9
+        base = 9
+        for i in range(n - 1):
+            count *= base
+            base -= 1
+        return count
