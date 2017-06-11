@@ -10,5 +10,6 @@ class Solution(object):
         if root.left is None and root.right is None:
             if is_left:
                 self.total += root.val
-        self.explore(root.left, True)
-        self.explore(root.right, False)
+        else:
+            self.explore(root.left, True)
+            self.explore(root.right, False)
