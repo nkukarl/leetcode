@@ -1,21 +1,37 @@
 class Solution(object):
     def get_minimum_difference(self, root):
-        self.min_diff = 2 ** 31
-        self.explore(root)
-        return self.min_diff
+        self.nodes = []
+        self.push_left(root)
 
-    def explore(self, root):
+        min_diff = prev = None
+        while self.nodes:
+            node = self.nodes.pop()
+            self.push_left(node.right)
+            if prev is None:
+                prev = node.val
+                continue
+            diff = node.val - prev
+            if min_diff is None:
+                min_diff = diff
+            else:
+                min_diff = min(min_diff, diff)
+            prev = node.val
+
+        return min_diff
+
+    def push_left(self, root):
+        while root:
+            self.nodes.append(root)
+            root = root.left
+
+    def get_minimum_difference_inorder_traverse(self, root):
+        nums = []
+        self.traverse(root, nums)
+        return min([n1 - n2 for n1, n2 in zip(nums[1:], nums[:-1])])
+
+    def traverse(self, root, nums):
         if root is None:
             return
-        if root.left is not None:
-            node = root.left
-            while node.right is not None:
-                node = node.right
-            self.min_diff = min(self.min_diff, root.val - node.val)
-        if root.right is not None:
-            node = root.right
-            while node.left is not None:
-                node = node.left
-            self.min_diff = min(self.min_diff, node.val - root.val)
-        self.explore(root.left)
-        self.explore(root.right)
+        self.traverse(root.left, nums)
+        nums.append(root.val)
+        self.traverse(root.right, nums)
