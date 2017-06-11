@@ -1,21 +1,20 @@
 class Solution(object):
     def frequency_sort(self, s):
-        summary = self.summarise(s)
-        stat, stat_keys = self.get_stat(summary)
-        res = ''
-        for n in stat_keys:
-            for c in stat[n]:
-                res += c * n
-        return res
+        # Summarise s to get char: count as key: value pairs.
+        summary_raw = {}
+        for char in s:
+            summary_raw[char] = summary_raw.get(char, 0) + 1
 
-    def summarise(self, s):
-        summary = {}
-        for c in s:
-            summary[c] = summary.get(c, 0) + 1
-        return summary
+        # Each element is a pair of count and char
+        summary = [(v, k) for k, v in summary_raw.items()]
 
-    def get_stat(self, summary):
-        stat = {}
-        for c, n in summary.items():
-            stat[n] = stat.get(n, []) + [c]
-        return stat, sorted(list(stat.keys()), reverse=True)
+        # Characters with low frequency will come first, hence when building
+        # ans, we should pop from summary.
+        summary.sort()
+
+        ans = ''
+        while summary:
+            count, char = summary.pop()
+            ans += char * count
+
+        return ans
