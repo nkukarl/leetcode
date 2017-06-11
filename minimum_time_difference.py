@@ -1,12 +1,15 @@
 class Solution(object):
     def find_min_difference(self, time_points):
-        minutes = []
-        for tp in time_points:
-            minutes.append(self.convert_to_minutes(tp))
+        if len(time_points) > 1440:
+            return 0
+        minutes = list(map(self.convert_to_minutes, time_points))
         minutes.sort()
         min_diff = 720
-        for m1, m2 in zip(minutes[:-1], minutes[1:]):
+        for i in range(len(minutes) - 1):
+            m1, m2 = minutes[i], minutes[i + 1]
             diff = self.calc_diff(m1, m2)
+            if 0 == diff:
+                return 0
             min_diff = min(min_diff, diff)
         diff = self.calc_diff(minutes[0], minutes[-1])
         return min(min_diff, diff)
