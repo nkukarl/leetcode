@@ -1,14 +1,11 @@
 class Solution(object):
     def first_unique_char(self, s):
-        chars = set()
-        duplicates = set()
+        summary = {}
         for char in s:
-            if char not in chars:
-                chars.add(char)
-            else:
-                duplicates.add(char)
+            summary[char] = summary.get(char, 0) + 1
 
         for i, char in enumerate(s):
-            if char not in duplicates:
+            if 1 == summary[char]:
                 return i
+
         return -1
