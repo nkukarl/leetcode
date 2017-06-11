@@ -1,12 +1,22 @@
 class Solution(object):
     def move_zeros(self, nums):
-        front = 1
-        for i, n in enumerate(nums):
-            if n != 0:
-                front = max(front, i + 1)
-                continue
-            while front < len(nums) and 0 == nums[front]:
-                front += 1
-            if front >= len(nums):
-                break
-            nums[i], nums[front] = nums[front], nums[i]
+        m = len(nums)
+
+        # Find the index of the first zero
+        slow = 0
+        while slow < m and nums[slow] != 0:
+            slow += 1
+
+        # If slow has reached te end of nums, simply return.
+        if slow >= m - 1:
+            return
+
+        # Find the index of the first non-zero after the first zero
+        fast = slow + 1
+        while fast < m:
+            while fast < m and 0 == nums[fast]:
+                fast += 1
+            if fast < m:
+                nums[slow], nums[fast] = nums[fast], nums[slow]
+                slow += 1
+                fast += 1
