@@ -17,6 +17,13 @@ class TestContinuousSubarraySum(TestCase):
         ],
         [
             {
+                'nums': [1, 2, -2, 1],
+                'k': 0,
+            },
+            True,
+        ],
+        [
+            {
                 'nums': [1, 2],
                 'k': 0,
             },

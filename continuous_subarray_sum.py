@@ -1,21 +1,29 @@
 class Solution(object):
     def check_subarray_sum(self, nums, k):
-        # Handle simple scenarios
-        if len(nums) < 2:
-            return False
+        """
+        
+        Args:
+            nums: A list of non-negative numbers 
+            k: A target integer
+
+        Returns:
+            bool
+
+        """
         if 0 == k:
-            return 0 == sum(nums)
-        if 1 == k:
-            return True
-        # Handle general scenarios
-        current = 0
+            # This ensures cur + n does not change when mod by k
+            # which is equivalent to
+            # cur = (cur + n) % k if k else (cur + n)
+            # Using abs to ensure that it also works when negatives numbers
+            # exist in nums.
+            k = sum(map(abs, nums)) + 1
+        cur = 0
         cache = {0: -1}
-        for i, num in enumerate(nums):
-            current += num % k
-            current %= k
-            if current in cache:
-                if i - cache[current] >= 2:
-                    return True
-            else:
-                cache[current] = i
+        for i, n in enumerate(nums):
+            cur = (cur + n) % k
+            if cur not in cache:
+                cache[cur] = i
+            elif i - cache[cur] > 1:
+                return True
+
         return False
