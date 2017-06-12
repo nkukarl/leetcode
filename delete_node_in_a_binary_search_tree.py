@@ -15,8 +15,6 @@ class Solution(object):
         return root
 
     def get_rightmost(self, node):
-        rightmost = None
         while node is not None:
-            rightmost = node
             node = node.right
-        return rightmost
+        return node
