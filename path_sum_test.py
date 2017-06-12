@@ -1,8 +1,10 @@
 import random
 from unittest import TestCase
 
+from nose_parameterized import parameterized
+
 from path_sum import Solution
-from utils_tree import get_root_tree
+from utils_tree import get_root_tree, construct_tree
 
 
 class TestPathSum(TestCase):
@@ -19,7 +21,7 @@ class TestPathSum(TestCase):
         # Verify
         self.assertTrue(ans)
 
-    def test_path_sum(self):
+    def test_full_path_sum(self):
         # Setup
         sol = Solution()
         tree_raw = [1, 2, 3, 4, 5, 6, 7]
@@ -33,8 +35,35 @@ class TestPathSum(TestCase):
         sum_ = random.choice(list(sum_path_map.keys()))
 
         # Exercise
-        ans = sol.path_sum(root, sum_)
+        ans = sol.full_path_sum(root, sum_)
         expected_ans = sum_path_map[sum_]
+
+        # Verify
+        self.assertEqual(ans, expected_ans)
+
+    @parameterized.expand([
+        [
+            [
+                [10], [5, -3], [3, 2, None, 11], [3, -2, None, 1],
+            ],
+            8,
+            3,
+        ],
+        [
+            [
+                [1], [1, 1], [1, 1, 1, 1], [1, 1, 1, 1, 1],
+            ],
+            2,
+            11,
+        ],
+    ])
+    def test_path_sum(self, serialized_data, sum_, expected_ans):
+        # Setup
+        sol = Solution()
+        root = construct_tree(serialized_data)
+
+        # Exercise
+        ans = sol.path_sum(root, sum_)
 
         # Verify
         self.assertEqual(ans, expected_ans)
