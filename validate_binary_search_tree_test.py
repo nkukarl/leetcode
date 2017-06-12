@@ -2,29 +2,29 @@ from unittest import TestCase
 
 from nose_parameterized import parameterized
 
-from utils_tree import get_root_tree
+from utils_tree import construct_tree
 from validate_binary_search_tree import Solution
 
 
 class TestValidateBinarySearchTree(TestCase):
     @parameterized.expand([
         [
-            [1, 2, 3, 4, 5, 6, 7],
+            [[4], [2, 6], [1, 3, 5, 7]],
             True,
         ],
         [
-            [1, 2, 3, 6, 5, 4, 7],
+            [[4], [2, 5], [1, 3, 6, 7]],
             False,
         ],
         [
-            [1, 2, 3, 4, 3, 6, 7],
+            [[4], [2, 6], [7, 3, 5, 1]],
             False,
         ],
     ])
-    def test_is_valid_bst(self, tree_raw, expected_ans):
+    def test_is_valid_bst(self, serialized_data, expected_ans):
         # Setup
         sol = Solution()
-        root = get_root_tree(tree_raw)
+        root = construct_tree(serialized_data)
 
         # Exercise
         ans = sol.is_valid_bst(root)

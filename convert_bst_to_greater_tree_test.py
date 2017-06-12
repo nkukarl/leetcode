@@ -1,20 +1,20 @@
 from unittest import TestCase
 
 from convert_bst_to_greater_tree import Solution
-from utils_tree import compare_trees, get_root_tree
+from utils_tree import compare_trees, construct_tree
 
 
 class TestConvertBSTToGreaterTree(TestCase):
     def test_convert_bst(self):
         # Setup
         sol = Solution()
-        tree_raw = [1, 2, 3, 4, 5, 6, 7]
-        root = get_root_tree(tree_raw)
+        serialized_data = [[4], [2, 6], [1, 3, 5, 7]]
+        root = construct_tree(serialized_data)
 
         # Exercise
         root = sol.convert_bst(root)
 
         # Verify
-        expected_tree_raw = [28, 27, 25, 22, 18, 13, 7]
-        expected_root = get_root_tree(expected_tree_raw)
+        expected_tree_raw = [[22], [27, 13], [28, 25, 18, 7]]
+        expected_root = construct_tree(expected_tree_raw)
         self.assertTrue(compare_trees(root, expected_root))

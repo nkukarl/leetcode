@@ -2,15 +2,15 @@ import random
 from unittest import TestCase
 
 from lowest_common_ancestor import Solution
-from utils_tree import get_root_tree, compare_trees
+from utils_tree import compare_trees, construct_tree
 
 
 class TestLowestCommonAncestorOfABinarySearchTree(TestCase):
     def test_lowest_common_ancestor_bst(self):
         # Setup
         sol = Solution()
-        tree_raw = [1, 2, 3, 4, 5, 6, 7]
-        root = get_root_tree(tree_raw)
+        serialized_data = [[4], [2, 6], [1, 3, 5, 7]]
+        root = construct_tree(serialized_data)
         p, q = root.left.left, root.left.right
 
         # Exercise
@@ -44,9 +44,14 @@ class TestLowestCommonAncestorOfABinarySearchTree(TestCase):
     def test_lowest_common_ancestor(self):
         # Setup
         sol = Solution()
-        tree_raw = [1, 2, 3, 4, 5, 6, 7]
-        random.shuffle(tree_raw)
-        root = get_root_tree(tree_raw)
+        serialized_data_raw = [1, 2, 3, 4, 5, 6, 7]
+        random.shuffle(serialized_data_raw)
+        serialized_data = [
+            serialized_data_raw[:1],
+            serialized_data_raw[1:3],
+            serialized_data_raw[3:],
+        ]
+        root = construct_tree(serialized_data)
         p, q = root.left.left, root.left.right
 
         # Exercise

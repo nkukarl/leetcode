@@ -3,44 +3,45 @@ from unittest import TestCase
 from nose_parameterized import parameterized
 
 from delete_node_in_a_binary_search_tree import Solution
-from utils_tree import compare_trees, get_root_tree, TreeNode
+from utils_tree import compare_trees, construct_tree, TreeNode
 
 
 class TestDeleteNodeInABinarySearchTree(TestCase):
     @parameterized.expand([
         [
-            [1, 2, 3, 4, 5, 6, 7],
+            [[4], [2, 6], [1, 3, 5, 7]],
             1,
-            [None, 2, 3, 4, 5, 6, 7]
+            [[4], [2, 6], [None, 3, 5, 7]],
         ],
         [
-            [1, 2, 3, 4, 5, 6, 7],
+            [[4], [2, 6], [1, 3, 5, 7]],
             2,
-            [None, 1, 3, 4, 5, 6, 7]
+            [[4], [1, 6], [None, 3, 5, 7]],
         ],
         [
-            [1, 2, 3, 4, 5, 6, 7],
+            [[4], [2, 6], [1, 3, 5, 7]],
             3,
-            [1, 2, None, 4, 5, 6, 7]
+            [[4], [2, 6], [1, None, 5, 7]],
         ],
     ])
-    def test_delete_node_simple(self, tree_raw, key_, expected_tree_raw):
+    def test_delete_node_simple(self, serialized_data, key_,
+                                expected_serialized_data):
         # Setup
         sol = Solution()
-        root = get_root_tree(tree_raw)
+        root = construct_tree(serialized_data)
 
         # Exercise
         root = sol.delete_node(root, key_)
 
         # Verify
-        expected_root = get_root_tree(expected_tree_raw)
+        expected_root = construct_tree(expected_serialized_data)
         self.assertTrue(compare_trees(root, expected_root))
 
     def test_delete_node_complicated(self):
         # Setup
         sol = Solution()
-        tree_raw = [1, 2, 3, 4, 5, 6, 7]
-        root = get_root_tree(tree_raw)
+        serialized_data = [[4], [2, 6], [1, 3, 5, 7]]
+        root = construct_tree(serialized_data)
         key_ = 4
 
         # Exercise

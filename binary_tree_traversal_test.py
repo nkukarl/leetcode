@@ -1,13 +1,14 @@
 from unittest import TestCase
 
 from binary_tree_traversal import Solution
-from utils_tree import get_root_tree
+from utils_tree import construct_tree
 
 
 class TestBinaryTreeTraversal(TestCase):
     def setup(self):
-        tree_raw = [1, 2, 3, 4, 5, 6, 7]
-        return get_root_tree(tree_raw)
+        serialized_data = [[4], [2, 6], [1, 3, 5, 7]]
+        root = construct_tree(serialized_data)
+        return root
 
     def test_preorder_traversal(self):
         # Setup

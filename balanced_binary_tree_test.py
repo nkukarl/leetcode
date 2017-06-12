@@ -1,15 +1,15 @@
 from unittest import TestCase
 
 from balanced_binary_tree import Solution
-from utils_tree import get_root_tree
+from utils_tree import construct_tree
 
 
 class TestBalancedBinaryTree(TestCase):
     def test_is_balanced(self):
         # Setup
         sol = Solution()
-        tree_raw = [1, 2, 3, 4]
-        root = get_root_tree(tree_raw)
+        serialized_data = [[3], [2, 4], [1]]
+        root = construct_tree(serialized_data)
 
         # Exercise
         ans = sol.is_balanced(root)

@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from serialize_and_deserialize_binary_tree import Codec
-from utils_tree import compare_trees, get_root_tree, TreeNode
+from utils_tree import compare_trees, construct_tree, TreeNode
 
 
 class TestSerializeAndDeserializeBST(TestCase):
@@ -15,7 +15,8 @@ class TestSerializeAndDeserializeBST(TestCase):
         """
         # Setup
         codec = Codec()
-        root = get_root_tree([1, 2, 3, 4, 5, 6, 7])
+        serialized_data = [[4], [2, 6], [1, 3, 5, 7]]
+        root = construct_tree(serialized_data)
 
         # Exercise
         data = codec.serialize(root)
@@ -40,7 +41,8 @@ class TestSerializeAndDeserializeBST(TestCase):
         root = codec.deserialize(data)
 
         # Verify
-        expected_root = get_root_tree([1, 2, 3, 4, 5, 6, 7])
+        serialized_data = [[4], [2, 6], [1, 3, 5, 7]]
+        expected_root = construct_tree(serialized_data)
         self.assertTrue(compare_trees(root, expected_root))
 
     def test_serialize_non_complete_tree(self):

@@ -3,28 +3,24 @@ from unittest import TestCase
 from nose_parameterized import parameterized
 
 from most_frequent_subtree_sum import Solution
-from utils_tree import get_root_tree
+from utils_tree import construct_tree
 
 
 class TestFindFrequentTreeSum(TestCase):
     @parameterized.expand([
         [
-            [2, 5, -3],
+            [[5], [2, -3]],
             [2, -3, 4],
         ],
         [
-            [2, 5, -5],
+            [[5], [2, -5]],
             [2],
         ],
-        [
-            [1, 1, 2, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 2, 1],
-            [2]
-        ]
     ])
-    def test_find_frequent_tree_sum(self, tree_raw, expected_ans):
+    def test_find_frequent_tree_sum(self, serialized_data, expected_ans):
         # Setup
         sol = Solution()
-        root = get_root_tree(tree_raw)
+        root = construct_tree(serialized_data)
 
         # Exercise
         ans = sol.find_frequent_tree_sum(root)

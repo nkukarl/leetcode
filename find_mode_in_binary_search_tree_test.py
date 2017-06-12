@@ -4,36 +4,36 @@ from unittest import TestCase
 from nose_parameterized import parameterized
 
 from find_mode_in_binary_search_tree import Solution
-from utils_tree import get_root_tree
+from utils_tree import construct_tree
 
 
 class TestFindModeInBST(TestCase):
     @parameterized.expand([
         [
+            construct_tree([]),
             [],
-            [],
         ],
         [
-            [1] * 3,
-            [1]
+            construct_tree([[1], [1, 1]]),
+            [1],
         ],
         [
-            [1] * 3 + [2] * 2,
-            [1]
+            construct_tree([[3], [3, 3], [2, None, 2]]),
+            [3],
         ],
         [
-            [1] * 5 + [2] * 5 + [3] * 4,
+            construct_tree(
+                [[3], [3, 3], [2, 1, 2, 1], [2, 1, None, None, 2, 1]]
+            ),
             [1, 2],
         ],
     ])
-    def test_find_mode(self, tree_raw, expected_ans):
+    def test_find_mode(self, root, expected_ans):
         # Setup
         sol = Solution()
-        random.shuffle(tree_raw)
-        root = get_root_tree(tree_raw)
 
         # Exercise
         ans = sol.find_mode(root)
 
         # Verify
-        self.assertEqual(ans, expected_ans)
+        self.assertEqual(sorted(ans), sorted(expected_ans))

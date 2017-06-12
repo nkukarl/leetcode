@@ -4,15 +4,15 @@ from unittest import TestCase
 from nose_parameterized import parameterized
 
 from path_sum import Solution
-from utils_tree import get_root_tree, construct_tree
+from utils_tree import construct_tree
 
 
 class TestPathSum(TestCase):
     def test_has_path_sum(self):
         # Setup
         sol = Solution()
-        tree_raw = [1, 2, 3, 4, 5, 6, 7]
-        root = get_root_tree(tree_raw)
+        serialized_data = [[4], [2, 6], [1, 3, 5, 7]]
+        root = construct_tree(serialized_data)
         sum_ = random.choice([7, 9, 15, 17])
 
         # Exercise
@@ -24,8 +24,8 @@ class TestPathSum(TestCase):
     def test_full_path_sum(self):
         # Setup
         sol = Solution()
-        tree_raw = [1, 2, 3, 4, 5, 6, 7]
-        root = get_root_tree(tree_raw)
+        serialized_data = [[4], [2, 6], [1, 3, 5, 7]]
+        root = construct_tree(serialized_data)
         sum_path_map = {
             7: [[4, 2, 1]],
             9: [[4, 2, 3]],

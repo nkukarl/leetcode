@@ -2,15 +2,20 @@ import random
 from unittest import TestCase
 
 from minimum_absolute_difference_in_bst import Solution
-from utils_tree import get_root_tree
+from utils_tree import construct_tree
 
 
 class TestMinimumAbsoluteDifferenceInBST(TestCase):
     def test_get_minimum_difference(self):
         # Setup
         sol = Solution()
-        tree_raw = sorted(random.sample(list(range(1000)), 7))
-        root = get_root_tree(tree_raw)
+        serialized_data_raw = sorted(random.sample(list(range(1000)), 7))
+        serialized_data = [
+            serialized_data_raw[:1],
+            serialized_data_raw[1:3],
+            serialized_data_raw[3:],
+        ]
+        root = construct_tree(serialized_data)
 
         # Exercise
         ans = sol.get_minimum_difference(root)
@@ -22,8 +27,13 @@ class TestMinimumAbsoluteDifferenceInBST(TestCase):
     def test_get_minimum_difference_inorder_traverse(self):
         # Setup
         sol = Solution()
-        tree_raw = sorted(random.sample(list(range(1000)), 7))
-        root = get_root_tree(tree_raw)
+        serialized_data_raw = sorted(random.sample(list(range(1000)), 7))
+        serialized_data = [
+            serialized_data_raw[:1],
+            serialized_data_raw[1:3],
+            serialized_data_raw[3:],
+        ]
+        root = construct_tree(serialized_data)
 
         # Exercise
         ans = sol.get_minimum_difference_inorder_traverse(root)

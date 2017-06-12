@@ -1,15 +1,15 @@
 from unittest import TestCase
 
 from flatten_binary_tree_to_linked_list import Solution
-from utils_tree import compare_trees, get_root_tree, TreeNode
+from utils_tree import compare_trees, construct_tree, TreeNode
 
 
 class TestFlattenBinaryTreeToLinkedList(TestCase):
     def test_flatten(self):
         # Setup
         sol = Solution()
-        tree_raw = [1, 2, 3, 4, 5, 6, 7]
-        root = get_root_tree(tree_raw)
+        serialized_data = [[4], [2, 6], [1, 3, 5, 7]]
+        root = construct_tree(serialized_data)
 
         # Exercise
         sol.flatten(root)
