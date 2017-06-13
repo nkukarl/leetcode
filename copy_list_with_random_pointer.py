@@ -41,10 +41,7 @@ class Solution(object):
         # # # # # # # # # # # # # # # # # # # # # # #
         node = head
         while node is not None:
-            if node.random is not None:
-                node.next.random = node.random.next
-            else:
-                node.next.random = None
+            node.next.random = node.random.next if node.random else None
             node = node.next.next
         # # # # # # # # # # # # # # # # # # # # # # #
         #                                           #
