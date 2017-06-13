@@ -1,6 +1,6 @@
 class TrieNode(object):
     def __init__(self):
-        self.children = {}
+        self.leaves = {}
         self.is_word = False
 
 
@@ -11,27 +11,23 @@ class Trie(object):
     def insert(self, word):
         node = self.root
         for w in word:
-            if w not in node.children:
-                node.children[w] = TrieNode()
-            node = node.children[w]
+            if w not in node.leaves:
+                node.leaves[w] = TrieNode()
+            node = node.leaves[w]
         node.is_word = True
 
     def search(self, word):
-        if '' == word:
-            return False
         node = self.root
         for w in word:
-            if w not in node.children:
+            if w not in node.leaves:
                 return False
-            node = node.children[w]
+            node = node.leaves[w]
         return node.is_word
 
     def starts_with(self, prefix):
-        if '' == prefix:
-            return False
         node = self.root
         for p in prefix:
-            if p not in node.children:
+            if p not in node.leaves:
                 return False
-            node = node.children[p]
+            node = node.leaves[p]
         return True
