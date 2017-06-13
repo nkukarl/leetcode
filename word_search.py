@@ -1,13 +1,9 @@
 class Solution(object):
     def exist(self, board, word):
-        if '' == word:
-            return True
         m, n = len(board), len(board[0])
         visited = [[0] * n for _ in range(m)]
         for i in range(m):
             for j in range(n):
-                if board[i][j] != word[0]:
-                    continue
                 if self.explore(board, i, j, word, visited):
                     return True
         return False
