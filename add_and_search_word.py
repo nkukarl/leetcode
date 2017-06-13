@@ -1,6 +1,6 @@
 class TrieNode(object):
     def __init__(self):
-        self.children = {}
+        self.leaves = {}
         self.is_word = False
 
 
@@ -11,9 +11,9 @@ class WordDictionary(object):
     def add_word(self, word):
         node = self.root
         for w in word:
-            if w not in node.children:
-                node.children[w] = TrieNode()
-            node = node.children[w]
+            if w not in node.leaves:
+                node.leaves[w] = TrieNode()
+            node = node.leaves[w]
         node.is_word = True
 
     def search(self, word):
@@ -23,12 +23,12 @@ class WordDictionary(object):
     def _search(self, word, node):
         if '' == word:
             return node.is_word
-
-        if '.' == word[0]:
-            for char in node.children:
-                if self._search(word[1:], node.children[char]):
+        w = word[0]
+        if '.' == w:
+            for char in node.leaves:
+                if self._search(word[1:], node.leaves[char]):
                     return True
             return False
-        if word[0] in node.children:
-            return self._search(word[1:], node.children[word[0]])
+        if w in node.leaves:
+            return self._search(word[1:], node.leaves[w])
         return False
