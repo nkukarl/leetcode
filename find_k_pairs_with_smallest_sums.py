@@ -1,50 +1,89 @@
-# TODO: Fix TLE
-class Solution(object):
-    def k_smallest_pairs(self, nums1, nums2, k):
-        if 0 in [len(nums1), len(nums2)]:
-            return []
+class MaxHeap(object):
+    def __init__(self, size, MIN_INT):
+        self.size = size
+        self.MIN_INT = MIN_INT
         self.pairs = []
-        self.MAX = nums1[0] + nums2[0] + 1
-        for n1 in nums1:
-            for n2 in nums2:
-                sum_ = n1 + n2
-                self.pairs.append((sum_, [n1, n2]))
-                self.MAX = max(self.MAX, sum_ + 1)
-        self.heapify()
-        pairs = []
-        while k > 0 and len(self.pairs) > 0:
-            pairs.append(self.pop_current_min())
-            k -= 1
-        return pairs
 
-    def pop_current_min(self):
-        self.pairs[0], self.pairs[-1] = self.pairs[-1], self.pairs[0]
-        _, pair = self.pairs.pop()
-        if len(self.pairs) > 0:
+    def is_empty(self):
+        return 0 == len(self.pairs)
+
+    def push(self, pair):
+        if len(self.pairs) == self.size:
+            total, _, _ = pair
+            if total >= self.pairs[0][0]:
+                return
+            self.pairs[0] = pair
             self.sift_down(0)
+        else:
+            self.pairs.append(pair)
+            self.sift_up(len(self.pairs) - 1)
+
+    def pop(self):
+        self.pairs[0], self.pairs[-1] = self.pairs[-1], self.pairs[0]
+        pair = self.pairs.pop()
+        self.sift_down(0)
         return pair
 
-    def heapify(self):
-        index = len(self.pairs) // 2 - 1
-        while index >= 0:
-            self.sift_down(index)
-            index -= 1
-
-    def sift_down(self, index):
-        while True:
-            sum_ = self.pairs[index][0]
-            left, right = index * 2 + 1, index * 2 + 2
-            sum_left = self.pairs[left][0] \
-                if left < len(self.pairs) else self.MAX
-            sum_right = self.pairs[right][0] \
-                if right < len(self.pairs) else self.MAX
-            if sum_left > sum_ < sum_right:
-                break
-            if sum_left < sum_right:
-                self.pairs[index], self.pairs[left] = \
-                    self.pairs[left], self.pairs[index]
-                index = left
+    def sift_up(self, cur_id):
+        while cur_id > 0:
+            parent_id = (cur_id - 1) // 2
+            parent_total = self.pairs[parent_id][0]
+            if self.pairs[cur_id][0] > parent_total:
+                self.pairs[cur_id], self.pairs[parent_id] = \
+                    self.pairs[parent_id], self.pairs[cur_id]
             else:
-                self.pairs[index], self.pairs[right] = \
-                    self.pairs[right], self.pairs[index]
-                index = right
+                break
+            cur_id = parent_id
+
+    def sift_down(self, cur_id):
+        while cur_id < len(self.pairs) // 2:
+            left_child_id = 2 * cur_id + 1
+            right_child_id = 2 * cur_id + 2
+            # Given i < len(self.pairs) // 2, left_child always exists.
+            left_total = self.pairs[left_child_id][0]
+            if right_child_id >= len(self.pairs):
+                right_total = self.MIN_INT
+            else:
+                right_total = self.pairs[right_child_id][0]
+            current_val = self.pairs[cur_id][0]
+            if left_total <= current_val >= right_total:
+                break
+            if left_total > right_total:
+                self.pairs[cur_id], self.pairs[left_child_id] = \
+                    self.pairs[left_child_id], self.pairs[cur_id]
+                cur_id = left_child_id
+            else:
+                self.pairs[cur_id], self.pairs[right_child_id] = \
+                    self.pairs[right_child_id], self.pairs[cur_id]
+                cur_id = right_child_id
+
+
+class Solution(object):
+    def k_smallest_pairs(self, nums1, nums2, k):
+        """
+        Basically, we are maintaining a max heap with size of less than or
+        equal to k.
+        For each pair, push it to the heap.
+        After looping through the pairs, pop each element in the heap
+        and return them in the reverse order.
+        
+        This solution does not require nums1 or nums2 to be sorted,
+        which is a more generic solution.
+        However, given that nums1 and nums2 are sorted, there should
+        be room for further improvement.
+        """
+        if 0 in [len(nums1), len(nums2)]:
+            return []
+        MIN_INT = min(nums1) + min(nums2) - 1
+        max_heap = MaxHeap(k, MIN_INT)
+        for m in nums1:
+            for n in nums2:
+                pair = (m + n, m, n)
+                max_heap.push(pair)
+
+        ans = []
+        while not max_heap.is_empty():
+            total, m, n = max_heap.pop()
+            ans.append([m, n])
+
+        return ans[::-1]
