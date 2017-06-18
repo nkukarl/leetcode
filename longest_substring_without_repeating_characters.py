@@ -1,9 +1,7 @@
 class Solution(object):
     def length_of_longest_substring(self, s):
-        if len(s) < 2:
-            return len(s)
         summary = {}
-        max_count = 1
+        max_count = 0
         left = 0
         for i, char in enumerate(s):
             if char in summary:
